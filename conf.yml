@@ -1,0 +1,4 @@
+binaries:
+  youtubeDl: bin/youtube-dl
+  ffmpeg: bin/ffmpeg
+  ffprobe: bin/ffprobe

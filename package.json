@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cristianrgreco/youtube-downloader-node/issues"
   },
-  "homepage": "https://github.com/cristianrgreco/youtube-downloader-node#readme"
+  "homepage": "https://github.com/cristianrgreco/youtube-downloader-node#readme",
+  "dependencies": {
+    "yamljs": "^0.2.3"
+  }
 }

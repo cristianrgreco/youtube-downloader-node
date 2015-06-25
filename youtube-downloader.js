@@ -4,14 +4,15 @@ let state = require('./state');
 let progress = require('./progress');
 let spawn = require('child_process').spawn;
 
-const YOUTUBEDL_LOCATION = __dirname + '/bin/youtube-dl';
-const FFMPEG_LOCATION = __dirname + '/bin/ffmpeg';
+const BINARIES = require('yamljs').load('conf.yml').binaries;
+const YOUTUBEDL_BINARY = __dirname + '/' + BINARIES.youtubeDl;
+const FFMPEG_BINARY = __dirname + '/' + BINARIES.ffmpeg;
 const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
 const OUTPUT_VIDEO_FORMAT = 'mp4';
 const OUTPUT_AUDIO_FORMAT = 'mp3';
 
 exports.title = function (url, callback) {
-    let process = spawn(YOUTUBEDL_LOCATION, [
+    let process = spawn(YOUTUBEDL_BINARY, [
         '--get-title',
         '--encoding', 'UTF-8',
         '--no-part',
@@ -21,7 +22,7 @@ exports.title = function (url, callback) {
 };
 
 exports.filename = function (url, callback) {
-    let process = spawn(YOUTUBEDL_LOCATION, [
+    let process = spawn(YOUTUBEDL_BINARY, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--get-filename',
@@ -51,7 +52,7 @@ function getFirstLineOfOutput(process, callback) {
 }
 
 exports.downloadVideo = function (url, stateChangeCallback, progressUpdateCallback) {
-    let process = spawn(YOUTUBEDL_LOCATION, [
+    let process = spawn(YOUTUBEDL_BINARY, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--no-part',
@@ -61,14 +62,14 @@ exports.downloadVideo = function (url, stateChangeCallback, progressUpdateCallba
 };
 
 exports.downloadAudio = function (url, stateChangeCallback, progressUpdateCallback) {
-    let process = spawn(YOUTUBEDL_LOCATION, [
+    let process = spawn(YOUTUBEDL_BINARY, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--no-part',
         '--no-playlist',
         '--extract-audio',
         '--audio-format', OUTPUT_AUDIO_FORMAT,
-        '--ffmpeg-location', FFMPEG_LOCATION,
+        '--ffmpeg-location', FFMPEG_BINARY,
         url]);
     return download(process, stateChangeCallback, progressUpdateCallback);
 };
