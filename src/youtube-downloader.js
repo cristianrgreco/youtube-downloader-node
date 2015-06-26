@@ -2,18 +2,15 @@
 
 let state = require('./state');
 let progress = require('./progress');
+let binaries = require('./binaries');
 let spawn = require('child_process').spawn;
-
-const BINARIES = require('yamljs').load('conf.yml').binaries;
-const YOUTUBEDL_BINARY = __dirname + '/../' + BINARIES.youtubeDl;
-const FFMPEG_BINARY = __dirname + '/../' + BINARIES.ffmpeg;
 
 const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
 const OUTPUT_VIDEO_FORMAT = 'mp4';
 const OUTPUT_AUDIO_FORMAT = 'mp3';
 
 exports.title = function (url, callback) {
-    let process = spawn(YOUTUBEDL_BINARY, [
+    let process = spawn(binaries.paths.youtubeDl, [
         '--get-title',
         '--encoding', 'UTF-8',
         '--no-part',
@@ -23,7 +20,7 @@ exports.title = function (url, callback) {
 };
 
 exports.filename = function (url, callback) {
-    let process = spawn(YOUTUBEDL_BINARY, [
+    let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--get-filename',
@@ -53,7 +50,7 @@ function output(process, callback) {
 }
 
 exports.downloadVideo = function (url, callback) {
-    let process = spawn(YOUTUBEDL_BINARY, [
+    let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--no-part',
@@ -63,14 +60,14 @@ exports.downloadVideo = function (url, callback) {
 };
 
 exports.downloadAudio = function (url, callback) {
-    let process = spawn(YOUTUBEDL_BINARY, [
+    let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--no-part',
         '--no-playlist',
         '--extract-audio',
         '--audio-format', OUTPUT_AUDIO_FORMAT,
-        '--ffmpeg-location', FFMPEG_BINARY,
+        '--ffmpeg-location', binaries.paths.ffmpeg,
         url]);
     return download(process, callback);
 };

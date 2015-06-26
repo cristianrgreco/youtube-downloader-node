@@ -3,11 +3,6 @@
 let ytdl = require('./youtube-downloader');
 let binaries = require('./binaries');
 
-const BINARIES = require('yamljs').load('conf.yml').binaries;
-const YOUTUBEDL_BINARY = __dirname + '/../' + BINARIES.youtubeDl;
-const FFMPEG_BINARY = __dirname + '/../' + BINARIES.ffmpeg;
-const FFPROBE_BINARY = __dirname + '/../' + BINARIES.ffprobe;
-
 const TEST_URLS = [
     'http://www.youtube.com/watch?v=lWA2pjMjpBs',
     'https://www.youtube.com/watch?v=tg00YEETFzg',
@@ -16,11 +11,11 @@ const TEST_URLS = [
     'https://www.youtube.com/watch?v=J3UjJ4wKLkg'
 ];
 
-binaries.valid(YOUTUBEDL_BINARY, FFMPEG_BINARY, FFPROBE_BINARY, err => {
+binaries.valid(err => {
     if (err) {
         throw new Error('Binaries are invalid: ' + err);
     }
-    TEST_URLS.forEach(url => ytdl.downloadVideo(url, (err, state, progress) => {
+    TEST_URLS.forEach(url => ytdl.downloadAudio(url, (err, state, progress) => {
         if (err) {
             throw new Error(err);
         }
