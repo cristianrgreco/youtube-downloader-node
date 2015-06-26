@@ -1,10 +1,10 @@
 'use strict';
 
-exports.NONE = 0;
-exports.RESOLVING = 1;
-exports.DOWNLOADING = 2;
-exports.CONVERTING = 3;
-exports.COMPLETE = 4;
+exports.NONE = {id: 0, text: 'NONE'};
+exports.RESOLVING = {id: 1, text: 'RESOLVING'};
+exports.DOWNLOADING = {id: 2, text: 'DOWNLOADING'};
+exports.CONVERTING = {id: 3, text: 'CONVERTING'};
+exports.COMPLETE = {id: 4, text: 'COMPLETE'};
 
 const RESOLVING_PATTERN = /^\[youtube]/;
 const DOWNLOADING_PATTERN = /^\[download]/;
