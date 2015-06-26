@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/cristianrgreco/youtube-downloader-node#readme",
   "dependencies": {
+    "byline": "^4.2.1",
     "yamljs": "^0.2.3"
   }
 }

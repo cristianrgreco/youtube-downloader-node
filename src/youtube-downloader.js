@@ -3,6 +3,7 @@
 let state = require('./state');
 let progress = require('./progress');
 let binaries = require('./binaries');
+let byline = require('byline');
 let spawn = require('child_process').spawn;
 
 const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
@@ -78,7 +79,7 @@ function download(process, callback) {
 
     if (callback) {
         let currentState = state.NONE;
-        process.stdout.on('data', data => {
+        byline(process.stdout).on('data', data => {
             if (state.isValid(data)) {
                 let newState = state.of(data);
                 if (currentState !== newState) {
@@ -94,7 +95,7 @@ function download(process, callback) {
     }
 
     let err = '';
-    process.stderr.on('data', data => {
+    byline(process.stderr).on('data', data => {
         if (!isWarning(data)) {
             err += data;
         }
