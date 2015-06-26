@@ -1,15 +1,15 @@
 'use strict';
 
+const RESOLVING_PATTERN = /^\[youtube]/;
+const DOWNLOADING_PATTERN = /^\[download]/;
+const CONVERTING_PATTERN = /^\[ffmpeg]/;
+const VALID_STATE_MESSAGE = /^\[(youtube|download|ffmpeg)]/;
+
 exports.NONE = {id: 0, text: 'NONE'};
 exports.RESOLVING = {id: 1, text: 'RESOLVING'};
 exports.DOWNLOADING = {id: 2, text: 'DOWNLOADING'};
 exports.CONVERTING = {id: 3, text: 'CONVERTING'};
 exports.COMPLETE = {id: 4, text: 'COMPLETE'};
-
-const RESOLVING_PATTERN = /^\[youtube]/;
-const DOWNLOADING_PATTERN = /^\[download]/;
-const CONVERTING_PATTERN = /^\[ffmpeg]/;
-const VALID_STATE_MESSAGE = /^\[(youtube|download|ffmpeg)]/;
 
 exports.isValid = function (state) {
     return VALID_STATE_MESSAGE.test(state);
