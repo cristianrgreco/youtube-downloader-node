@@ -19,12 +19,13 @@ exports.valid = function () {
         spawn(FFMPEG_BINARY, ['-version']),
         spawn(FFPROBE_BINARY, ['-version'])
     ];
-    return Promise.all(processes.map(process => new Promise((resolve, reject) => {
+    let promises = processes.map(process => new Promise((resolve, reject) => {
         process.on('close', exitCode => {
             if (exitCode !== 0) {
                 reject('Failed with exit value: ' + exitCode);
             }
             resolve();
         })
-    })));
+    }));
+    return Promise.all(promises);
 };
