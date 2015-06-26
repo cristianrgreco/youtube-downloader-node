@@ -98,7 +98,11 @@ function download(process, stateChangeCallback, progressUpdateCallback) {
 
     let err = '';
     process.stderr.on('data', data => {
-        err += data;
+        if (!isWarning(data)) {
+            err += data;
+        } else {
+            console.error(data);
+        }
     });
 
     process.on('close', () => {
@@ -109,4 +113,8 @@ function download(process, stateChangeCallback, progressUpdateCallback) {
             stateChangeCallback(state.COMPLETE);
         }
     });
+}
+
+function isWarning(err) {
+    return err.lastIndexOf('WARNING:', 0) === 0;
 }
