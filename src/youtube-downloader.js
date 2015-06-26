@@ -7,6 +7,7 @@ let spawn = require('child_process').spawn;
 const BINARIES = require('yamljs').load('conf.yml').binaries;
 const YOUTUBEDL_BINARY = __dirname + '/' + BINARIES.youtubeDl;
 const FFMPEG_BINARY = __dirname + '/' + BINARIES.ffmpeg;
+
 const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
 const OUTPUT_VIDEO_FORMAT = 'mp4';
 const OUTPUT_AUDIO_FORMAT = 'mp3';
@@ -18,7 +19,7 @@ exports.title = function (url, callback) {
         '--no-part',
         '--no-playlist',
         url]);
-    return getFirstLineOfOutput(process, callback);
+    return output(process, callback);
 };
 
 exports.filename = function (url, callback) {
@@ -30,10 +31,10 @@ exports.filename = function (url, callback) {
         '--no-part',
         '--no-playlist',
         url]);
-    return getFirstLineOfOutput(process, callback);
+    return output(process, callback);
 };
 
-function getFirstLineOfOutput(process, callback) {
+function output(process, callback) {
     process.stdout.setEncoding('UTF-8');
     process.stderr.setEncoding('UTF-8');
 
