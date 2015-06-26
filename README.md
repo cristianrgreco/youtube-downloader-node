@@ -8,7 +8,11 @@
 var ytdl = require('./youtube-downloader');
 
 ytdl.title('https://www.youtube.com/watch?v=lWA2pjMjpBs', (err, title) => console.log(title));
-ytdl.downloadAudio('https://www.youtube.com/watch?v=lWA2pjMjpBs', state => console.log(state), progress => console.log(progress));
+ytdl.downloadAudio(
+    'https://www.youtube.com/watch?v=lWA2pjMjpBs',
+    state => console.log(state),
+    progress => console.log(progress),
+    error => console.error(error));
 ```
 
 ## Setup

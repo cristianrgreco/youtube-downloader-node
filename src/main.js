@@ -18,7 +18,12 @@ const TEST_URLS = [
 
 binaries.valid(YOUTUBEDL_BINARY, FFMPEG_BINARY, FFPROBE_BINARY, err => {
     if (err) {
-        throw new Error('Binaries are invalid');
+        throw new Error('Binaries are invalid: ' + err);
     }
-    TEST_URLS.forEach(url => ytdl.downloadAudio(url, state => console.log(state), progress => console.log(progress)));
+    TEST_URLS.forEach(url => ytdl.downloadAudio(url,
+            state => console.log(state),
+            progress => console.log(progress),
+            error => {
+            throw new Error(error);
+        }));
 });

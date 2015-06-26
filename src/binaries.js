@@ -7,7 +7,7 @@ exports.valid = function (youtubeDl, ffmpeg, ffprobe, callback) {
     processes.forEach(process => {
         process.on('close', exitCode => {
             if (exitCode !== 0) {
-                return callback(exitCode);
+                return callback('Failed with exit value: ' + exitCode);
             }
             return callback(null, true);
         })

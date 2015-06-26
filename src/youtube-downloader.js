@@ -52,17 +52,17 @@ function output(process, callback) {
     });
 }
 
-exports.downloadVideo = function (url, stateChangeCallback, progressUpdateCallback) {
+exports.downloadVideo = function (url, stateChangeCallback, progressUpdateCallback, errorCallback) {
     let process = spawn(YOUTUBEDL_BINARY, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--no-part',
         '--no-playlist',
         url]);
-    return download(process, stateChangeCallback, progressUpdateCallback);
+    return download(process, stateChangeCallback, progressUpdateCallback, errorCallback);
 };
 
-exports.downloadAudio = function (url, stateChangeCallback, progressUpdateCallback) {
+exports.downloadAudio = function (url, stateChangeCallback, progressUpdateCallback, errorCallback) {
     let process = spawn(YOUTUBEDL_BINARY, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
@@ -72,10 +72,10 @@ exports.downloadAudio = function (url, stateChangeCallback, progressUpdateCallba
         '--audio-format', OUTPUT_AUDIO_FORMAT,
         '--ffmpeg-location', FFMPEG_BINARY,
         url]);
-    return download(process, stateChangeCallback, progressUpdateCallback);
+    return download(process, stateChangeCallback, progressUpdateCallback, errorCallback);
 };
 
-function download(process, stateChangeCallback, progressUpdateCallback) {
+function download(process, stateChangeCallback, progressUpdateCallback, errorCallback) {
     process.stdout.setEncoding('UTF-8');
     process.stderr.setEncoding('UTF-8');
 
@@ -107,7 +107,7 @@ function download(process, stateChangeCallback, progressUpdateCallback) {
 
     process.on('close', () => {
         if (err) {
-            throw new Error('An error has occurred: ' + err);
+            errorCallback(err);
         }
         if (stateChangeCallback) {
             stateChangeCallback(state.COMPLETE);
