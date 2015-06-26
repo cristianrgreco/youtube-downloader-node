@@ -5,8 +5,8 @@ let progress = require('./progress');
 let spawn = require('child_process').spawn;
 
 const BINARIES = require('yamljs').load('conf.yml').binaries;
-const YOUTUBEDL_BINARY = __dirname + '/' + BINARIES.youtubeDl;
-const FFMPEG_BINARY = __dirname + '/' + BINARIES.ffmpeg;
+const YOUTUBEDL_BINARY = __dirname + '/../' + BINARIES.youtubeDl;
+const FFMPEG_BINARY = __dirname + '/../' + BINARIES.ffmpeg;
 
 const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
 const OUTPUT_VIDEO_FORMAT = 'mp4';
