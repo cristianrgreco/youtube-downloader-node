@@ -15,7 +15,7 @@ binaries.valid().then(function () {
     TEST_URLS.forEach(url => {
         ytdl.downloadAudio(url, (err, state, progress) => {
             if (err) {
-                throw new Error(err);
+                console.error(err);
             }
             if (state) {
                 console.log(state);
@@ -26,5 +26,5 @@ binaries.valid().then(function () {
         })
     });
 }, function (err) {
-    console.error(err);
+    console.error('Binaries are invalid: ' + err);
 });

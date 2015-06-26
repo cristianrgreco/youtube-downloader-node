@@ -22,7 +22,7 @@ exports.valid = function () {
     let promises = processes.map(process => new Promise((resolve, reject) => {
         process.on('close', exitCode => {
             if (exitCode !== 0) {
-                reject('Failed with exit value: ' + exitCode);
+                reject('Failed with exit value of ' + exitCode);
             }
             resolve();
         })
