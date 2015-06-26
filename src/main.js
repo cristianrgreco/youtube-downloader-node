@@ -20,10 +20,15 @@ binaries.valid(YOUTUBEDL_BINARY, FFMPEG_BINARY, FFPROBE_BINARY, err => {
     if (err) {
         throw new Error('Binaries are invalid: ' + err);
     }
-    TEST_URLS.forEach(url => ytdl.downloadAudio(url,
-            state => console.log(state),
-            progress => console.log(progress),
-            error => {
-            throw new Error(error);
-        }));
+    TEST_URLS.forEach(url => ytdl.downloadVideo(url, (err, state, progress) => {
+        if (err) {
+            throw new Error(err);
+        }
+        if (state) {
+            console.log(state);
+        }
+        if (progress) {
+            console.log(progress);
+        }
+    }));
 });
