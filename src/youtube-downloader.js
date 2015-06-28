@@ -47,7 +47,7 @@ function output(process, callback) {
         if (err) {
             return callback(err);
         }
-        return callback(null, title);
+        return callback(null, title.trim());
     });
 }
 
@@ -107,6 +107,7 @@ function download(process) {
             eventEmitter.emit('error', err);
         }
         eventEmitter.emit('state', state.COMPLETE);
+        eventEmitter.emit('complete');
     });
 
     return eventEmitter;
