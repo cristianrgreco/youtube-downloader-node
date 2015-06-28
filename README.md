@@ -14,6 +14,7 @@ let download = ytdl.downloadAudio(url);
 download.on('state', state => console.log(state));
 download.on('progress', progress => console.log(progress));
 download.on('error', error => console.error(error));
+download.on('complete' () => console.log('Finished'));
 ```
 
 ## Setup
