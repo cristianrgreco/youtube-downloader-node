@@ -15,9 +15,9 @@ exports.paths = {
 
 exports.valid = function () {
     let processes = [
-        spawn(YOUTUBEDL_BINARY, ['--version']),
-        spawn(FFMPEG_BINARY, ['-version']),
-        spawn(FFPROBE_BINARY, ['-version'])
+        spawn(this.paths.youtubeDl, ['--version']),
+        spawn(this.paths.ffmpeg, ['-version']),
+        spawn(this.paths.ffprobe, ['-version'])
     ];
     let promises = processes.map(process => new Promise((resolve, reject) => {
         process.on('close', exitCode => {
