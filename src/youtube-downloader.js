@@ -3,6 +3,7 @@
 let state = require('./state');
 let progress = require('./progress');
 let binaries = require('./binaries');
+let events = require('events');
 let byline = require('byline');
 let spawn = require('child_process').spawn;
 
@@ -50,17 +51,17 @@ function output(process, callback) {
     });
 }
 
-exports.downloadVideo = function (url, callback) {
+exports.downloadVideo = function (url) {
     let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
         '--no-part',
         '--no-playlist',
         url]);
-    return download(process, callback);
+    return download(process);
 };
 
-exports.downloadAudio = function (url, callback) {
+exports.downloadAudio = function (url) {
     let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
@@ -70,29 +71,29 @@ exports.downloadAudio = function (url, callback) {
         '--audio-format', OUTPUT_AUDIO_FORMAT,
         '--ffmpeg-location', binaries.paths.ffmpeg,
         url]);
-    return download(process, callback);
+    return download(process);
 };
 
-function download(process, callback) {
+function download(process) {
     process.stdout.setEncoding('UTF-8');
     process.stderr.setEncoding('UTF-8');
 
-    if (callback) {
-        let currentState = state.NONE;
-        byline(process.stdout).on('data', data => {
-            if (state.isValid(data)) {
-                let newState = state.of(data);
-                if (currentState !== newState) {
-                    currentState = newState;
-                    callback(null, newState);
-                }
+    let eventEmitter = new events.EventEmitter();
+
+    let currentState = state.NONE;
+    byline(process.stdout).on('data', data => {
+        if (state.isValid(data)) {
+            let newState = state.of(data);
+            if (currentState !== newState) {
+                currentState = newState;
+                eventEmitter.emit('state', newState);
             }
-            if (progress.isValid(data)) {
-                let newProgress = progress.of(data);
-                callback(null, null, newProgress);
-            }
-        });
-    }
+        }
+        if (progress.isValid(data)) {
+            let newProgress = progress.of(data);
+            eventEmitter.emit('progress', newProgress);
+        }
+    });
 
     let err = '';
     byline(process.stderr).on('data', data => {
@@ -102,11 +103,13 @@ function download(process, callback) {
     });
 
     process.on('close', () => {
-        if (callback && err) {
-            callback(err);
+        if (err) {
+            eventEmitter.emit('error', err);
         }
-        return callback(null, state.COMPLETE);
+        eventEmitter.emit('state', state.COMPLETE);
     });
+
+    return eventEmitter;
 }
 
 function isWarning(err) {
