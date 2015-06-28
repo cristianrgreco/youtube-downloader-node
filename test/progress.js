@@ -52,7 +52,7 @@ module.exports = testCase({
 
     'throwsErrorIfUnableToParse': test => {
         test.expect(1);
-        test.throws(() => progress.of(INVALID_PROGRESS_MESSAGE), Error, 'Throws error for invalid message');
+        test.throws(() => progress.of(INVALID_PROGRESS_MESSAGE), Error, 'Throws error for invalid progress message');
         test.done();
     },
 
