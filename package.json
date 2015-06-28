@@ -1,23 +1,26 @@
 {
-  "name": "youtube-downloader-node",
-  "version": "1.0.0",
-  "description": "This project serves as a NodeJS wrapper for the youtube-dl Python binary.",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cristianrgreco/youtube-downloader-node.git"
-  },
-  "author": "Cristian Greco",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cristianrgreco/youtube-downloader-node/issues"
-  },
-  "homepage": "https://github.com/cristianrgreco/youtube-downloader-node#readme",
-  "dependencies": {
-    "byline": "^4.2.1",
-    "yamljs": "^0.2.3"
-  }
+    "name": "youtube-downloader-node",
+    "version": "1.0.0",
+    "description": "This project serves as a NodeJS wrapper for the youtube-dl Python binary.",
+    "main": "main.js",
+    "scripts": {
+        "test": "node --harmony node_modules/nodeunit/bin/nodeunit test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cristianrgreco/youtube-downloader-node.git"
+    },
+    "author": "Cristian Greco",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/cristianrgreco/youtube-downloader-node/issues"
+    },
+    "homepage": "https://github.com/cristianrgreco/youtube-downloader-node#readme",
+    "dependencies": {
+        "byline": "^4.2.1",
+        "yamljs": "^0.2.3"
+    },
+    "devDependencies": {
+        "nodeunit": "^0.9.1"
+    }
 }
