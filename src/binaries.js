@@ -13,7 +13,7 @@ exports.paths = {
     ffprobe: FFPROBE_BINARY
 };
 
-exports.valid = function () {
+exports.valid = () => {
     let processes = [
         spawn(this.paths.youtubeDl, ['--version']),
         spawn(this.paths.ffmpeg, ['-version']),

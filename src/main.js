@@ -11,13 +11,13 @@ const TEST_URLS = [
     'https://www.youtube.com/watch?v=J3UjJ4wKLkg'
 ];
 
-binaries.valid().then(function () {
+binaries.valid().then(() => {
     TEST_URLS.forEach(url => {
         let download = ytdl.downloadAudio(url);
         download.on('state', state => console.log(state));
         download.on('progress', progress => console.log(progress));
         download.on('error', error => console.error(error));
     });
-}, function (err) {
+}, err => {
     console.error('Binaries are invalid: ' + err);
 });

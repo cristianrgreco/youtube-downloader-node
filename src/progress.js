@@ -5,14 +5,14 @@ const FILE_SIZE_PATTERN = /of.*?([A-z0-9].+?) /;
 const DOWNLOAD_SPEED_PATTERN = /at.*?(([A-z0-9].+?)|(Unknown)) /;
 const ETA_PATTERN = /ETA.*?(([0-9:]+)|(Unknown))/;
 
-exports.isValid = function (progress) {
+exports.isValid = progress => {
     return PERCENTAGE_COMPLETE_PATTERN.test(progress) &&
         FILE_SIZE_PATTERN.test(progress) &&
         DOWNLOAD_SPEED_PATTERN.test(progress) &&
         ETA_PATTERN.test(progress);
 };
 
-exports.of = function (input) {
+exports.of = input => {
     if (!this.isValid(input)) {
         throw new Error('Unable to parse: ' + input);
     }

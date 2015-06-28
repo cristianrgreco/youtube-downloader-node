@@ -11,11 +11,11 @@ exports.DOWNLOADING = {id: 2, text: 'DOWNLOADING'};
 exports.CONVERTING = {id: 3, text: 'CONVERTING'};
 exports.COMPLETE = {id: 4, text: 'COMPLETE'};
 
-exports.isValid = function (state) {
+exports.isValid = state => {
     return VALID_STATE_MESSAGE.test(state);
 };
 
-exports.of = function (input) {
+exports.of = input => {
     if (RESOLVING_PATTERN.test(input)) {
         return this.RESOLVING;
     } else if (DOWNLOADING_PATTERN.test(input)) {

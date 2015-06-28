@@ -11,7 +11,7 @@ const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
 const OUTPUT_VIDEO_FORMAT = 'mp4';
 const OUTPUT_AUDIO_FORMAT = 'mp3';
 
-exports.title = function (url, callback) {
+exports.title = (url, callback) => {
     let process = spawn(binaries.paths.youtubeDl, [
         '--get-title',
         '--encoding', 'UTF-8',
@@ -21,7 +21,7 @@ exports.title = function (url, callback) {
     return output(process, callback);
 };
 
-exports.filename = function (url, callback) {
+exports.filename = (url, callback) => {
     let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
@@ -51,7 +51,7 @@ function output(process, callback) {
     });
 }
 
-exports.downloadVideo = function (url) {
+exports.downloadVideo = url => {
     let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
@@ -61,7 +61,7 @@ exports.downloadVideo = function (url) {
     return download(process);
 };
 
-exports.downloadAudio = function (url) {
+exports.downloadAudio = url => {
     let process = spawn(binaries.paths.youtubeDl, [
         '-o', OUTPUT_FILENAME_FORMAT,
         '--format', OUTPUT_VIDEO_FORMAT,
