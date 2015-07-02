@@ -115,7 +115,7 @@ module.exports = testCase({
         test.expect(1);
         let download = ytdl.downloadVideo(URL_INVALID);
         download.on('error', error => {
-            test.equals(error, 'ERROR: Incomplete YouTube ID INVALIDURL. URL ' + URL_INVALID + ' looks truncated.')
+            test.equals(error, 'ERROR: Incomplete YouTube ID INVALIDURL. URL ' + URL_INVALID + ' looks truncated.');
             test.done();
         });
     },
