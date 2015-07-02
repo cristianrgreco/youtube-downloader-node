@@ -1,6 +1,7 @@
 'use strict';
 
 let testCase = require('nodeunit').testCase;
+
 let binaries = require('../src/binaries');
 
 module.exports = testCase({

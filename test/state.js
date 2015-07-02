@@ -1,6 +1,7 @@
 'use strict';
 
 let testCase = require('nodeunit').testCase;
+
 let state = require('../src/state');
 
 const RESOLVING_MESSAGE = "[youtube] oHg5SJYRHA0: Downloading webpage";

@@ -1,6 +1,7 @@
 'use strict';
 
 let testCase = require('nodeunit').testCase;
+
 let progress = require('../src/progress');
 
 const VALID_PROGRESS_MESSAGE = '[download]  10.8% of 9.22MiB at  5.68MiB/s ETA 00:01';

@@ -1,11 +1,13 @@
 'use strict';
 
+let spawn = require('child_process').spawn;
+let events = require('events');
+
+let byline = require('byline');
+
 let state = require('./state');
 let progress = require('./progress');
 let binaries = require('./binaries');
-let events = require('events');
-let byline = require('byline');
-let spawn = require('child_process').spawn;
 
 const OUTPUT_FILENAME_FORMAT = '%(title)s_%(id)s.%(ext)s';
 const OUTPUT_VIDEO_FORMAT = 'mp4';
