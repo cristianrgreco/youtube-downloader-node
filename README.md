@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-var ytdl = require('youtube-downloader-node');
+var ytdl = require('youtube-downloader-node')({youtubeDl: '/youtube-dl', ffmpeg: '/ffmpeg', ffprobe: '/ffprobe'});
 
 ytdl.title('https://www.youtube.com/watch?v=lWA2pjMjpBs', (err, title) => console.log(title));
 ytdl.filename('https://www.youtube.com/watch?v=lWA2pjMjpBs', (err, filename) => console.log(filename));
