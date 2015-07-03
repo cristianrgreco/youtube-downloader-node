@@ -3,8 +3,8 @@
 let fs = require('fs');
 let testCase = require('nodeunit').testCase;
 
-let ytdl = require('../src/youtube-downloader');
-let state = require('../src/state');
+let ytdl = require('../lib/youtube-downloader');
+let state = require('../lib/state');
 
 const URL_SHORT = 'https://www.youtube.com/watch?gl=GB&hl=en-GB&v=oHg5SJYRHA0';
 const URL_SPECIAL_ENCODING = 'https://www.youtube.com/watch?v=z-wi-HyaASc';

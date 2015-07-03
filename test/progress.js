@@ -2,7 +2,7 @@
 
 let testCase = require('nodeunit').testCase;
 
-let progress = require('../src/progress');
+let progress = require('../lib/progress');
 
 const VALID_PROGRESS_MESSAGE = '[download]  10.8% of 9.22MiB at  5.68MiB/s ETA 00:01';
 const VALID_PROGRESS_MESSAGE_UNKNOWN = '[download]  21.7% of 9.22MiB at Unknown speed ETA Unknown ETA';

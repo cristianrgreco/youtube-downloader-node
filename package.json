@@ -2,7 +2,7 @@
     "name": "youtube-downloader-node",
     "version": "1.0.0",
     "description": "This project serves as a NodeJS wrapper for the youtube-dl Python binary.",
-    "main": "main.js",
+    "main": "index.js",
     "scripts": {
         "test": "node --harmony node_modules/nodeunit/bin/nodeunit test"
     },

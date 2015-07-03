@@ -2,7 +2,7 @@
 
 let testCase = require('nodeunit').testCase;
 
-let binaries = require('../src/binaries');
+let binaries = require('../lib/binaries');
 
 module.exports = testCase({
     'allValid': test => {

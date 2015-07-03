@@ -2,7 +2,7 @@
 
 let testCase = require('nodeunit').testCase;
 
-let state = require('../src/state');
+let state = require('../lib/state');
 
 const RESOLVING_MESSAGE = "[youtube] oHg5SJYRHA0: Downloading webpage";
 const DOWNLOADING_MESSAGE = "[download]   0.0% of 9.22MiB at Unknown speed ETA Unknown ETA";
